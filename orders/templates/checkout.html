@@ -1,0 +1,186 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-8">
+            <div class="checkout-form">
+                <h4>Оформление заказа</h4>
+
+                <!-- Cart Items -->
+                <div class="cart-items mb-4">
+                    {% for item in cart_items %}
+                    <div class="cart-item">
+                        <img src="{{ item.content_object.image.url }}" alt="{{ item.content_object.name }}" class="cart-item-image">
+                        <div class="cart-item-details">
+                            <h3 class="cart-item-name">{{ item.content_object.name }}</h3>
+                            <p class="cart-item-size">Размер: {{ item.size }}см</p>
+                        </div>
+                        <div class="quantity-controls">
+                          
+                            <input type="number" class="quantity-input" value="{{ item.quantity }}" min="1" readonly>
+                            <div id="generalErrorContainer" class="alert alert-danger"></div>
+
+                        </div>
+                        <div class="price-info">
+                            <p class="unit-price">
+                                Цена за шт
+                                <strong>{{ item.price }} грн.</strong>
+                            </p>
+                        </div>
+                        <button class="remove-item" data-id="{{ item.id }}" aria-label="Удалить товар">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <polyline points="3 6 5 6 21 6"></polyline>
+                                <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path>
+                                <line x1="10" y1="11" x2="10" y2="17"></line>
+                                <line x1="14" y1="11" x2="14" y2="17"></line>
+                            </svg>
+                        </button>
+                    </div>
+                    {% endfor %}
+                </div>
+                <div id="messageContainer"></div> <!-- Контейнер для сообщений -->  
+                <!-- Checkout Form -->
+                <form id="checkoutForm" method="POST" action="{% url 'order:checkout' %}">
+                    {% csrf_token %}
+                    
+                    <!-- Contact Information -->
+                    <div class="form-section">
+                        <h5>1. Контактные данные</h5>
+                        <div class="row g-2">
+                            <div class="col-md-6">
+                                {{ form.first_name.label_tag }}
+                                {{ form.first_name }}
+                                {{ form.first_name.errors }}
+                            </div>
+                            <div class="col-md-6">
+                                {{ form.last_name.label_tag }}
+                                {{ form.last_name }}
+                                {{ form.last_name.errors }}
+                            </div>
+                            <div class="col-md-6">
+                                {{ form.phone.label_tag }}
+                                {{ form.phone }}
+                                {{ form.phone.errors }}
+                            </div>
+                            <div class="col-md-6">
+                                {{ form.email.label_tag }}
+                                {{ form.email }}
+                                {{ form.email.errors }}
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-section">
+                        <h5>2. Способ получения</h5>
+                        <div class="row g-2">
+                            <div class="col-md-6">
+                                <div class="form-check">
+                                    <input type="radio" id="pickupOption" name="delivery_type" value="pickup" class="form-check-input" required>
+                                    <label class="form-check-label" for="pickupOption">Самовывоз</label>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-check">
+                                    <input type="radio" id="deliveryOption" name="delivery_type" value="delivery" class="form-check-input" checked>
+                                    <label class="form-check-label" for="deliveryOption">Доставка</label>
+                                </div>
+                            </div>
+                        </div>
+                    
+                        <!-- Pickup Section -->
+                        <div id="pickupSection" class="delivery-section">
+                            {% comment %} <select class="form-select" name="pickup_location">
+                                <option value="" selected disabled>Выберите точку получения</option>
+                                <option value="Центр: Пиццерия 0057 Pizza">Центр: Пиццерия 0057 Pizza</option>
+                                <!-- Добавьте другие опции, если они есть -->
+                            </select> {% endcomment %}
+                            {{ form.pickup_location }}
+                            {% if form.pickup_location.errors %}
+                                <div class="alert alert-danger mt-2">
+                                    {{ form.pickup_location.errors|join:", " }}
+                                </div>
+                            {% endif %}
+                            <div class="pickup-details mt-2">
+                                <h6>Центр: Пиццерия 0057 Pizza</h6>
+                                <p>г. Харьков, ул. Сумская, 25, Оперный театр (правая сторона)</p>
+                                <div class="working-hours">
+                                    <span>Время работы: 11:00 – 22:00</span>
+                                </div>
+                                <p class="storage-time">Срок хранения: 1 час</p>
+                                <button class="btn btn-secondary btn-sm mt-1">Показать на карте</button>
+                            </div>
+                        </div>
+                    
+                        <!-- Delivery Section -->
+                        <div id="deliverySection" class="delivery-section">
+                            {{ form.address.label_tag }}
+                            {{ form.address }}  <!-- Поле ввода адреса -->
+                            {{ form.address.errors }}
+                        </div>
+                    </div>
+                    
+                    
+
+                    <!-- Payment Method -->
+                    <div class="form-section">
+                        <h5>3. Способы оплаты</h5>
+                        <div class="form-check">
+                            {{ form.payment_method.0 }}
+                            <label class="form-check-label" for="cardPayment">Перевод на банковскую карту</label>
+                        </div>
+                    </div>
+
+                    <!-- Comment -->
+                    <div class="form-section">
+                        <h5>4. Комментарий</h5>
+                        {{ form.comment.label_tag }}
+                        {{ form.comment }}
+                    </div>
+
+                    <button type="submit" class="btn-submit" form="checkoutForm">Оформить заказ</button>
+                </form>
+            </div>
+        </div>
+
+        <!-- Right Column - Order Summary -->
+        <div class="col-md-4">
+            <div class="order-summary">
+                <h5>Ваш заказ</h5>
+                <div class="summary-details">
+                    <div class="summary-row">
+                        <span>Товаров в корзине:</span>
+                        <span id="itemCount">{{ cart_items|length }}</span>
+                    </div>
+                    <div class="summary-row">
+                        <span>Итого:</span>
+                        <span id="subtotal">{{ cart_total }} грн.</span>
+                    </div>
+                    <div class="summary-row delivery-cost-row">
+                        <span>Доставка:</span>
+                        <span id="deliveryCost">0 грн.</span>
+                    </div>
+                    <div class="summary-row total">
+                        <span>Всего:</span>
+                        <strong id="grandTotal">{{ cart_total }} грн.</strong>
+                    </div>
+                </div>
+
+                <div class="terms-check">
+                    <div class="form-check">
+                        <input type="checkbox" class="form-check-input" id="terms" required>
+                        <label class="form-check-label" for="terms">
+                            Я прочитал(-а) <a href="#" class="terms-link">Условия оформления заказа</a> и согласен(-на) с условиями
+                        </label>
+                    </div>
+                </div>
+
+                <button type="submit" class="btn-submit" form="checkoutForm">Оформить заказ</button>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="https://unpkg.com/masonry-layout@4/dist/masonry.pkgd.min.js"></script>
+<script src="{% static 'js/order.js' %}"></script> 
+{% endblock %}

@@ -1,6 +1,6 @@
 {% extends "base.html" %}
 {% load static %}
-{% block title %}   <title>About-Us</title>{% endblock title %}
+{% block title %}   <title>{{title}}</title>{% endblock title %}
 {% block content %}
       <!-- parallax top-->
       <!-- Breadcrumbs -->
@@ -14,7 +14,7 @@
         </div>
         <div class="container">
             <ul class="breadcrumbs-custom-path">
-                <li><a href="{% url 'index' %}">Home</a></li>
+                <li><a href="{% url 'main:index' %}">Home</a></li>
                 <li class="active">About us</li>
             </ul>
         </div>
@@ -39,7 +39,7 @@
                           <a href="#tabs-4-4" data-toggle="tab">Our Values</a>
                       </li>
                   </ul>
-                  <a class="button button-xl button-primary button-winona" href="{% url 'contacts' %}">Contact us</a>
+                  <a class="button button-xl button-primary button-winona" href="{% url 'main:contacts' %}">Contact us</a>
               </div>
               <div class="col-lg-8 col-xl-9">
                   <!-- Tab panes-->

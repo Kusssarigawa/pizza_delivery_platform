@@ -1,0 +1,170 @@
+{% extends "base.html" %}
+{% load static %}
+{% block modal_cart %}
+
+    <div class="cart-wrapper">
+        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal" aria-expanded="false" id="cartButton">
+            <img src="{% static 'images/basket2-fill.png' %}" alt="Cart Icon" width="32" height="32" class="me-2">
+            <span id="cart-item-count" class="badge bg-dark text-white" style="font-size: 1.2em;">
+                0
+            </span>
+        </button>
+    </div>
+
+    <!-- Модальное окно -->
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content"> 
+                <div class="modal-header">
+                    <h5 class="modal-title" id="myModalLabel">Корзина</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">×</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock modal_cart %}
+
+{% block content %}
+<div class="container">
+
+    <h2>Pizzas</h2>
+    <div class="row">
+        {% for pizza in pizzas %}
+        
+        <div class="col-lg-3 col-md-4 col-sm-6 mb-4">
+            <div class="card h-100 shadow-sm">
+                <div class="position-relative">
+                    <a href="{% url 'menu:product_detail' pizza.slug %}">
+                        {% if pizza.image %}
+                            <img src="{{ pizza.image.url }}" class="card-img-top" alt="{{ pizza.name }}">
+                        {% else %}
+                            <img src="{% static 'images/default-pizza.png' %}" class="card-img-top" alt="{{ pizza.name }}">
+                        {% endif %}
+                    </a>
+                    <div class="size-price-tooltip">
+                        <p id="size-price-info"></p>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <h5 class="card-title text-danger">{{ pizza.name }}</h5>
+                    <p class="card-text text-muted">{{ pizza.description|truncatechars:100 }}</p>
+                    <p class="size-options mb-1">Размер:</p>
+                    <div class="size-buttons d-flex justify-content-around mb-3">
+                        <button class="size-btn btn btn-outline-secondary active" 
+                                data-size="25" data-extra-cost="0">25см</button>
+                        <button class="size-btn btn btn-outline-secondary" 
+                                data-size="30" data-extra-cost="20">30см</button>
+                        <button class="size-btn btn btn-outline-secondary" 
+                                data-size="40" data-extra-cost="40">40см</button>
+                    </div>
+                    <p class="price text-center"><strong><span class="pizza-price" data-base-price="{{ pizza.price }}">{{ pizza.price }}</span> грн.</strong></p>
+                    <div class="cart-options ">
+                        <input type="number" value="1" min="1"  class="pizza-quantity">
+                        {% if pizza.image %}
+                        <button class="add-to-cart-btn" data-product-id="{{ pizza.id }}" data-product-type="pizza">
+                            <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Ccircle cx='9' cy='21' r='1'%3E%3C/circle%3E%3Ccircle cx='20' cy='21' r='1'%3E%3C/circle%3E%3Cpath d='M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6'%3E%3C/path%3E%3C/svg%3E" alt="Корзина" class="cart-icon">
+                            В корзину
+                        </button>
+                        {% else %}
+                        <p>"new is coming soon!"</p>
+                        {% endif %}
+                    </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+    {% endfor %}
+    </div>
+</div>
+<div class="container">
+    <h2>Burgers</h2>
+    <div class="row">
+        {% for burger in burgers %}
+            <div class="col-lg-3 col-md-4 col-sm-6 mb-4">
+                <div class="card h-100 shadow-sm">
+                    <div class="position-relative">
+                        <a href="{% url 'menu:product_detail' burger.slug %}">
+                            {% if burger.image %}
+                                <img src="{{ burger.image.url }}" class="card-img-top" alt="{{ burger.name }}">
+                            {% else %}
+                                <img src="{% static 'media/burgers/default_burger_image.png' %}" class="card-img-top" alt="{{ burger.name }}">
+                            {% endif %}
+                        </a>
+                    </div>
+                    <div class="card-body">
+                        <h5 class="card-title text-danger">{{ burger.name }}</h5>
+                        <p class="card-text text-muted">{{ burger.description|truncatechars:100 }}</p>
+                        <p class="price text-center"><strong><span class="pizza-price" data-base-price="{{ burger.price }}">{{ burger.price }}</span> грн.</strong></p>
+                        <div class="cart-options">
+                            <input type="number" value="1" min="1" class="pizza-quantity">
+                            {% if burger.image %}
+                            <button class="add-to-cart-btn" data-product-id="{{ burger.id }}" data-product-type="burger">
+                                <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Ccircle cx='9' cy='21' r='1'%3E%3C/circle%3E%3Ccircle cx='20' cy='21' r='1'%3E%3C/circle%3E%3Cpath d='M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6'%3E%3C/path%3E%3C/svg%3E" alt="Корзина" class="cart-icon">
+                                В корзину
+                            </button>
+                            {% else %}
+                            <p>"new is coming soon!"</p>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+</div>
+
+<div class="container">
+    <h2>Drinks</h2>
+    <div class="row">
+        {% for drink in drinks %}
+            <div class="col-lg-3 col-md-4 col-sm-6 mb-4">
+                <div class="card h-100 shadow-sm">
+                    <div class="position-relative">
+                        <a href="{% url 'menu:product_detail' drink.slug %}">
+                            {% if drink.image %}
+                                <img src="{{ drink.image.url }}" class="card-img-top" alt="{{ drink.name }}">
+                            {% else %}
+                                <img src="{% static 'media/drinks/default_drink_image.png' %}" class="card-img-top" alt="{{ drink.name }}">
+                            {% endif %}
+                        </a>
+                    </div>
+                    <div class="card-body">
+                        <h5 class="card-title text-danger">{{ drink.name }}</h5>
+                        <p class="card-text text-muted">{{ drink.description|truncatechars:100 }}</p>
+                        <p class="size-buttons d-flex justify-content-between mb-3">Размер:</p>
+                        <div class="size-buttons d-flex justify-content-between mb-3">
+                            <button class="size-btn btn btn-outline-secondary active" 
+                                    data-size="small" data-extra-cost="0">S</button>
+                            <button class="size-btn btn btn-outline-secondary" 
+                                    data-size="medium" data-extra-cost="10">L</button>
+                            <button class="size-btn btn btn-outline-secondary" 
+                                    data-size="large" data-extra-cost="20">Xl</button>
+                        </div>                        
+                        <p class="price text-center"><strong><span class="pizza-price" data-base-price="{{ drink.price }}">{{ drink.price }}</span> грн.</strong></p>
+                        <div class="cart-options">
+                            <input type="number" value="1" min="1" class="pizza-quantity">
+                            {% if drink.image %}
+                            <button class="add-to-cart-btn" data-product-id="{{ drink.id }}" data-product-type="drink">
+                                <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Ccircle cx='9' cy='21' r='1'%3E%3C/circle%3E%3Ccircle cx='20' cy='21' r='1'%3E%3C/circle%3E%3Cpath d='M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6'%3E%3C/path%3E%3C/svg%3E" alt="Корзина" class="cart-icon">
+                                В корзину
+                            </button>
+                            {% else %}
+                            <p>"new is coming soon!"</p>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+</div>
+
+
+<script src="{% static 'js/cart.js' %}"></script>
+{% endblock %}

@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+<div class="container">
+    <h2>{{ object.name }}</h2>
+    <img src="{{ object.image.url }}" alt="{{ object.name }}" class="img-fluid">
+    <p>{{ object.description }}</p>
+    {% if object.size %}
+    <p>Размер: {{ object.get_size_display }}</p>
+    {% endif %}
+    {% if object.volume %}
+    <p>Объем: {{ object.volume }}</p>
+    {% endif %}
+    <p>Цена: {{ object.price }} грн.</p>
+</div>
+{% endblock %}

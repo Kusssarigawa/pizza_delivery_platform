@@ -1,0 +1,98 @@
+[
+    {
+      "model": "menu.ingredient",
+      "pk": 1,
+      "fields": {
+        "name": "Сыр",
+        "extra_price": "1.50"
+      }
+    },
+    {
+      "model": "menu.ingredient",
+      "pk": 2,
+      "fields": {
+        "name": "Пепперони",
+        "extra_price": "2.00"
+      }
+    },
+    {
+      "model": "menu.ingredient",
+      "pk": 3,
+      "fields": {
+        "name": "Грибы",
+        "extra_price": "1.50"
+      }
+    },
+    {
+      "model": "menu.pizza",
+      "pk": 1,
+      "fields": {
+        "name": "Маргарита",
+        "description": "Классическая итальянская пицца с томатами, моцареллой и базиликом",
+        "size": "medium",
+        "price": "120.00",
+        "slug": "margarita",
+        "image": "pizzas/margarita.jpg",
+        "ingredients": [1]
+      }
+    },
+    {
+      "model": "menu.pizza",
+      "pk": 2,
+      "fields": {
+        "name": "Пепперони",
+        "description": "Пицца с томатным соусом, моцареллой и пепперони",
+        "size": "large",
+        "price": "150.00",
+        "slug": "pepperoni",
+        "image": "pizzas/pepperoni.jpg",
+        "ingredients": [1, 2]
+      }
+    },
+    {
+      "model": "menu.burger",
+      "pk": 1,
+      "fields": {
+        "name": "Классический бургер",
+        "description": "Сочная говяжья котлета с сыром, салатом и томатом",
+        "price": "80.00",
+        "slug": "classic-burger",
+        "image": "burgers/classic.jpg",
+        "ingredients": [1]
+      }
+    },
+    {
+      "model": "menu.burger",
+      "pk": 2,
+      "fields": {
+        "name": "Грибной бургер",
+        "description": "Бургер с говяжьей котлетой, грибами и сыром",
+        "price": "90.00",
+        "slug": "mushroom-burger",
+        "image": "burgers/mushroom.jpg",
+        "ingredients": [1, 3]
+      }
+    },
+    {
+      "model": "menu.drink",
+      "pk": 1,
+      "fields": {
+        "name": "Кола",
+        "volume": "0.5L",
+        "price": "25.00",
+        "slug": "cola",
+        "image": "drinks/cola.jpg"
+      }
+    },
+    {
+      "model": "menu.drink",
+      "pk": 2,
+      "fields": {
+        "name": "Лимонад",
+        "volume": "0.33L",
+        "price": "20.00",
+        "slug": "lemonade",
+        "image": "drinks/lemonade.jpg"
+      }
+    }
+  ]

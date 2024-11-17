@@ -1,6 +1,6 @@
 {% extends "base.html" %}
 {% load static %}
-{% block title %}   <title>Contacts</title>{% endblock title %}
+{% block title %}   <title>{{title}}</title>{% endblock title %}
 {% block content %}
       <!-- Breadcrumbs -->
       <section class="bg-gray-7">
@@ -13,7 +13,7 @@
         </div>
         <div class="container">
           <ul class="breadcrumbs-custom-path">
-            <li><a href="{% url 'index' %}">Home</a></li>
+            <li><a href="{% url 'main:index' %}">Home</a></li>
             <li class="active">Contacts</li>
           </ul>
         </div>
@@ -24,7 +24,7 @@
           <div class="row row-60 justify-content-center">
             <div class="col-lg-8">
               <h4 class="text-spacing-25 text-transform-none">Get in Touch</h4>
-              <form class="rd-form rd-mailform" data-form-output="form-output-global" data-form-type="contacts" method="post" action="{% url 'contacts' %}">
+              <form class="rd-form rd-mailform" data-form-output="form-output-global" data-form-type="contacts" method="post" action="{% url 'main:contacts' %}">
                 {% csrf_token %}
                 <div class="row row-20 gutters-20">
                   <div class="col-md-6">
@@ -78,21 +78,21 @@
                     <p class="aside-contacts-title">Phone</p>
                     <div class="unit unit-spacing-xs justify-content-center justify-content-md-start">
                       <div class="unit-left"><span class="icon mdi mdi-phone"></span></div>
-                      <div class="unit-body"><a class="phone" href="tel:+[Ваш номер телефона]">+[Ваш номер телефона]</a></div>
+                      <div class="unit-body"><a class="phone" href="tel:+[Ваш номер телефона]">+[33366661111]</a></div>
                     </div>
                   </div>
                   <div class="col-sm-6 col-lg-12 aside-contacts-item">
                     <p class="aside-contacts-title">E-mail</p>
                     <div class="unit unit-spacing-xs justify-content-center justify-content-md-start">
                       <div class="unit-left"><span class="icon mdi mdi-email-outline"></span></div>
-                      <div class="unit-body"><a class="mail" href="mailto:[Ваш email]">[Ваш email]</a></div>
+                      <div class="unit-body"><a class="mail" href="mailto:[Ваш email]">[demo@gmail.com]</a></div>
                     </div>
                   </div>
                   <div class="col-sm-6 col-lg-12 aside-contacts-item">
                     <p class="aside-contacts-title">Address</p>
                     <div class="unit unit-spacing-xs justify-content-center justify-content-md-start">
                       <div class="unit-left"><span class="icon mdi mdi-map-marker"></span></div>
-                      <div class="unit-body"> <a class="address" href="#"> [Ваш адрес] </a> </div>
+                      <div class="unit-body"> <a class="address" href="#"> [Addres] </a> </div>
                     </div>
                   </div>
                 </div>

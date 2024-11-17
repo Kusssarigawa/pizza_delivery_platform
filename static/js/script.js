@@ -42,7 +42,7 @@
 				buttonWinona: $('.button-winona'),
 				multitoggle: document.querySelectorAll('[data-multitoggle]')
 			};
-
+		
 	// Initialize scripts that require a loaded page
 	$window.on('load', function () {
 		// Page loader & Page transition
@@ -78,6 +78,7 @@
 			}
 		}
 	});
+
 
 	// Initialize scripts that require a finished document
 	$(function () {

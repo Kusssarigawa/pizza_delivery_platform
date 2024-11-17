@@ -4,7 +4,7 @@
 <html class="wide wow-animation" lang="en">
   <head>
     {% comment %} исправить {% endcomment %}
-    {% block title %}   <title></title>{% endblock title %}
+    {% block title %}   {% endblock title %}
     <meta name="format-detection" content="telephone=no">
     <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -73,7 +73,7 @@
                               <button class="rd-navbar-toggle" data-rd-navbar-toggle=".rd-navbar-nav-wrap"><span></span></button>
                               <!-- RD Navbar Brand-->
                               <div class="rd-navbar-brand">
-                                  <a class="brand" href="{% url 'index' %}">
+                                  <a class="brand" href="{% url 'main:index' %}">
                                       <img class="brand-logo-dark" src="{% static 'images/logo-198x66.png' %}" alt="" width="198" height="66"/>
                                   </a>
                               </div>
@@ -103,14 +103,23 @@
                               </div>
                               <div class="rd-navbar-main">
                                   <!-- RD Navbar Nav-->
+                                   
                                   <ul class="rd-navbar-nav">
-                                      <li class="rd-nav-item"><a class="rd-nav-link" href="{% url 'index' %}">Home</a></li>
-                                      <li class="rd-nav-item active"><a class="rd-nav-link" href="{% url 'about-us' %}">About us</a></li>
-                                      <li class="rd-nav-item"><a class="rd-nav-link" href="{% url 'contacts' %}">Contacts</a></li>
+                                      <li class="rd-nav-item"><a class="rd-nav-link" href="{% url 'main:index' %}">Home</a></li>
+                                      <li class="rd-nav-item active"><a class="rd-nav-link" href="{% url "main:about-us" %}">About us</a></li>
+                                      <li class="rd-nav-item"><a class="rd-nav-link" href="{% url 'main:contacts' %}">Contacts</a></li>
+                                      <li class="rd-nav-item"><a class="rd-nav-link" href="{% url 'menu:menu' %}">Menu</a></li>
+
                                   </ul>
+                                  {% block modal_cart %}
+                               
+                                  
+                                  {% endblock modal_cart %}
                               </div>
+                              
                           </div>
-                   
+             
+                
   
 <div class="rd-navbar-project-hamburger rd-navbar-project-hamburger-open rd-navbar-fixed-element-1" 
      data-multitoggle=".rd-navbar-inner" 
@@ -120,8 +129,11 @@
         <span class="project-hamburger-arrow"></span>
         <span class="project-hamburger-arrow"></span>
         <span class="project-hamburger-arrow"></span>
+        
     </div>
+    
 </div>
+
 <div class="rd-navbar-project">
     <div class="rd-navbar-project-header">
         <h5 class="rd-navbar-project-title">Gallery</h5>
@@ -217,12 +229,14 @@
         </div>
     </div>
 </div>
+
      </header>
 
 
     <!-- Основной контент -->
         {% block content %}{% endblock %}
   
+
 <!-- Page Footer-->
        <footer class="section footer-modern context-dark footer-modern-2">
         <div class="footer-modern-line">
@@ -233,21 +247,18 @@
                         <ul class="footer-modern-list d-inline-block d-sm-block wow fadeInUp">
                             <li><a href="#">Pizzas</a></li>
                             <li><a href="#}">Burgers</a></li>
-                            <li><a href="#">Salads</a></li>
-                            <li><a href="#">Drinks</a></li>
-                            <li><a href="#}">Seafood</a></li>
                             <li><a href="#">Drinks</a></li>
                         </ul>
                     </div>
                     <div class="col-md-6 col-lg-4 col-xl-3">
                         <h5 class="footer-modern-title oh-desktop"><span class="d-inline-block wow slideInLeft">Information</span></h5>
                         <ul class="footer-modern-list d-inline-block d-sm-block wow fadeInUp">
-                            <li><a href="{% url 'about-us' %}">About us</a></li>
+                            <li><a href="{% url 'main:about-us' %}">About us</a></li>
                             <li><a href="#">Latest News</a></li>
-                            <li><a href="{% url 'menu' %}">Our Menu</a></li>
+                            <li><a href="{% url 'menu:menu' %}">Our Menu</a></li>
                             <li><a href="#">FAQ</a></li>
                             <li><a href="#">Shop</a></li>
-                            <li><a href="{% url 'contacts' %}">Contact Us</a></li>
+                            <li><a href="{% url 'main:contacts' %}">Contact Us</a></li>
                         </ul>
                     </div>
                     <div class="col-lg-4 col-xl-5">
@@ -273,7 +284,7 @@
                 <div class="row row-30 align-items-center">
                     <div class="col-sm-6 col-md-7 col-lg-4 col-xl-4">
                         <div class="row row-30 align-items-center text-lg-center">
-                            <div class="col-md-7 col-xl-6"><a class="brand" href="{% url 'index' %}"><img src="{% static 'images/logo-inverse-198x66.png' %}" alt="Logo" width="198" height="66"/></a></div>
+                            <div class="col-md-7 col-xl-6"><a class="brand" href="{% url 'main:index' %}"><img src="{% static 'images/logo-inverse-198x66.png' %}" alt="Logo" width="198" height="66"/></a></div>
                             <div class="col-md-5 col-xl-6">
                                 <div class="iso-1"><span><img src="{% static 'images/like-icon-58x25.png' %}" alt="Like Icon" width="58" height="25"/></span><span class="iso-1-big">9.4k</span></div>
                             </div>
@@ -324,6 +335,6 @@
 <!-- Javascript-->
     <script src="{% static 'js/core.min.js' %}"></script>
     <script src="{% static 'js/script.js' %}"></script>
-
+   
 </body>
 </html>

@@ -1,6 +1,6 @@
 {% extends "base.html" %}
 {% load static %}
-{% block title %}   <title>Home</title>{% endblock title %}
+{% block title %}   <title>{{title}}</title>{% endblock title %}
 {% block content %}
 <!-- Swiper-->
 <section class="section swiper-container swiper-slider swiper-slider-2 swiper-slider-3" data-loop="true" data-autoplay="5000" data-simulate-touch="false" data-slide-effect="fade">
@@ -59,18 +59,6 @@
       <div class="col-sm-6 col-lg-4">
         <div class="oh-desktop">
           <!-- Services Terri-->
-          <article class="services-terri wow slideInUp">
-            <div class="services-terri-figure"><img src="{% static 'images/menu-1-370x278.jpg' %}" alt="" width="370" height="278"/>
-            </div>
-            <div class="services-terri-caption"><span class="services-terri-icon linearicons-leaf"></span>
-              <h5 class="services-terri-title"><a href="#">Salads</a></h5>
-            </div>
-          </article>
-        </div>
-      </div>
-      <div class="col-sm-6 col-lg-4">
-        <div class="oh-desktop">
-          <!-- Services Terri-->
           <article class="services-terri wow slideInDown">
             <div class="services-terri-figure"><img src="{% static 'images/menu-2-370x278.jpg' %}" alt="" width="370" height="278"/>
             </div>
@@ -92,18 +80,7 @@
           </article>
         </div>
       </div>
-      <div class="col-sm-6 col-lg-4">
-        <div class="oh-desktop">
-          <!-- Services Terri-->
-          <article class="services-terri wow slideInDown">
-            <div class="services-terri-figure"><img src="{% static 'images/menu-4-370x278.jpg' %}" alt="" width="370" height="278"/>
-            </div>
-            <div class="services-terri-caption"><span class="services-terri-icon linearicons-ice-cream"></span>
-              <h5 class="services-terri-title"><a href="#">Desserts</a></h5>
-            </div>
-          </article>
-        </div>
-      </div>
+     
       <div class="col-sm-6 col-lg-4">
         <div class="oh-desktop">
           <!-- Services Terri-->
@@ -116,18 +93,7 @@
           </article>
         </div>
       </div>
-      <div class="col-sm-6 col-lg-4">
-        <div class="oh-desktop">
-          <!-- Services Terri-->
-          <article class="services-terri wow slideInDown">
-            <div class="services-terri-figure"><img src="{% static 'images/menu-6-370x278.jpg' %}" alt="" width="370" height="278"/>
-            </div>
-            <div class="services-terri-caption"><span class="services-terri-icon linearicons-steak"></span>
-              <h5 class="services-terri-title"><a href="#">Seafood</a></h5>
-            </div>
-          </article>
-        </div>
-      </div>
+
     </div>
   </div>
 </section>
