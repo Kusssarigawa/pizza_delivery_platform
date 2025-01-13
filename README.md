@@ -1,104 +1,156 @@
+Вот переработанный **README.md** с разделением на секции для запуска с использованием Docker и без него:  
 
 ---
 
-# 🍕 **PizzaLava - The Ultimate Pizza Delivery Service**
+# 🍕 **PizzaLava - The Ultimate Pizza Delivery Platform**
 ![screen_main](https://github.com/user-attachments/assets/523b39d0-ab55-43e5-89ce-fd96e2d55c25)
 
-Welcome to **PizzaLava**, the most delicious online pizza delivery service! Powered by Django and a blend of modern frameworks, PizzaLava is designed to deliver not just pizza but also a seamless and enjoyable user experience.
+Welcome to **PizzaLava**, your go-to online pizza delivery platform! Built on Django and equipped with modern tools, PizzaLava ensures a top-notch user experience and easy scalability.
 
-## 🚀 **Project Overview**
+---
 
-PizzaLava is built with **Django** at its core, ensuring a solid, scalable, and secure foundation for the business. We’ve integrated a variety of popular frameworks and tools to enhance both the frontend and backend of the application:
+## 🚀 **Project Highlights**
 
-- **Bootstrap 5** 🎨: For sleek, responsive designs.
-- **jQuery** ⚙️: For dynamic interactions and seamless user experience.
-- **FontAwesome** 💎: To provide beautiful icons and make the UI more intuitive.
-- **Swiper.js** 🎥: For smooth, touch-friendly sliders.
-- **PostgreSQL** 🗄️: Our reliable database solution.
-- **Gunicorn** & **Nginx** 🌐: For production-ready deployment.
+PizzaLava is packed with features to deliver both delicious pizzas and a great online experience:
+- **Django 5**: Secure and robust backend.
+- **Bootstrap 5**: Responsive and stylish UI.
+- **PostgreSQL**: Reliable database solution.
+- **Docker & Docker Compose**: Simplified containerized setup.
+- **Static Assets**: Enhanced interactivity using jQuery, FontAwesome, and Swiper.js.
 
-## 📦 **Installation Guide**
+---
 
-### 1. **Clone the Repository**
+## 📦 **Getting Started**
 
-Start by cloning the repository to your local machine:
+You can run PizzaLava in two ways:
+1. **Using Docker (Recommended)**: Simplifies setup and deployment with containerization.
+2. **Manual Setup**: Traditional approach using virtual environments and local dependencies.
 
+---
+
+### 🐳 **1. Using Docker**
+
+#### Prerequisites
+- Install [Docker](https://docs.docker.com/get-docker/) and [Docker Compose](https://docs.docker.com/compose/install/).
+
+#### Steps
+1. **Clone the Repository**
+   ```bash
+   git clone https://github.com/yourusername/PizzaLava.git
+   cd PizzaLava
+   ```
+
+2. **Create an `.env` File**  
+   Add environment variables to a `.env` file in the project root. Example:  
+   ```env
+   SECRET_KEY=your-django-secret-key
+   DEBUG=True
+   DJANGO_ALLOWED_HOSTS=localhost 127.0.0.1
+   DATABASE_NAME=pizza
+   DATABASE_USER=postgres
+   DATABASE_PASSWORD=yourpassword
+   DATABASE_HOST=db
+   DATABASE_PORT=5432
+   ```
+
+3. **Build and Start Services**  
+   Run the following command to build and start the containers:
+   ```bash
+   docker-compose up --build
+   ```
+
+4. **Access the Application**
+   - Visit the app at `http://localhost:8000`.
+   - Create a superuser for administrative tasks:
+     ```bash
+     docker-compose exec web python manage.py createsuperuser
+     ```
+
+#### Managing Static Files
+Run the following command inside the `web` container to collect static files:
 ```bash
-git clone https://github.com/yourusername/PizzaLava.git
-cd PizzaLava
+docker-compose exec web python manage.py collectstatic
 ```
 
-### 2. **Set Up a Virtual Environment**
+---
 
-It's always a good idea to keep dependencies isolated. Set up a virtual environment:
+### 🖥️ **2. Manual Setup**
 
-```bash
-python3 -m venv venv
-source venv/bin/activate  # On Windows use `venv\Scripts\activate`
-```
+#### Prerequisites
+- Python 3.10+ installed on your system.
+- PostgreSQL installed and running.
 
-### 3. **Install Dependencies**
+#### Steps
+1. **Clone the Repository**
+   ```bash
+   git clone https://github.com/yourusername/PizzaLava.git
+   cd PizzaLava
+   ```
 
-Next, install all required packages:
+2. **Set Up a Virtual Environment**
+   ```bash
+   python3 -m venv venv
+   source venv/bin/activate  # On Windows: venv\Scripts\activate
+   ```
 
-```bash
-pip install -r requirements.txt
-```
+3. **Install Dependencies**
+   ```bash
+   pip install -r requirements.txt
+   ```
 
-### 4. **Database Setup**
+4. **Configure Database**
+   - Set up a PostgreSQL database and update the `.env` file with your credentials:
+     ```env
+     DATABASE_NAME=pizza
+     DATABASE_USER=postgres
+     DATABASE_PASSWORD=yourpassword
+     DATABASE_HOST=localhost
+     DATABASE_PORT=5432
+     ```
 
-Apply migrations to set up the database:
+5. **Apply Migrations**
+   ```bash
+   python manage.py migrate
+   ```
 
-```bash
-python manage.py migrate
-```
+6. **Run the Development Server**
+   ```bash
+   python manage.py runserver
+   ```
 
-### 5. **Static Files**
+7. **Access the Application**
+   - Open `http://127.0.0.1:8000` in your browser.
+   - Create a superuser:
+     ```bash
+     python manage.py createsuperuser
+     ```
 
-Collect static files for Bootstrap, jQuery, and other front-end frameworks:
+---
 
-```bash
-python manage.py collectstatic
-```
+## 🔧 **Features**
+- 🍕 **Dynamic Menu**: Fully customizable pizzas with add-ons.
+- 📱 **Responsive Design**: Optimized for all devices.
+- 🚚 **Order Tracking**: Keep up with your orders in real-time.
+- 🛠 **Admin Panel**: Manage orders, menus, and more with ease.
 
-### 6. **Run the Server**
-
-You're all set! Start the development server to see PizzaLava in action:
-
-```bash
-python manage.py runserver
-```
-
-Visit `http://127.0.0.1:8000/` in your browser, and enjoy! 🍕🚀
-
-## 🔧 **Key Features**
-
-- **Responsive Design**: Thanks to Bootstrap 5, PizzaLava looks great on all devices.
-- **Dynamic User Interface**: jQuery ensures that the site is interactive and responsive.
-- **Iconic Interface**: FontAwesome adds flair with beautiful icons.
-- **Smooth Navigation**: Swiper.js makes scrolling through content a breeze.
-- **Secure & Scalable**: Django, combined with PostgreSQL and production tools like Gunicorn and Nginx, ensures the app is ready for real-world use.
+---
 
 ## 🤝 **Contributing**
 
-We welcome contributions! Feel free to open issues, submit pull requests, or just share ideas. Let’s make PizzaLava even better together!
+We welcome contributions! Feel free to fork the repository, submit pull requests, or open issues. Let's make PizzaLava even better together.
 
-## 📜 **License**
+---
+
+## 📝 **License**
 
 This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for more details.
 
-## 🧑‍💻 **Authors**
-
-- **Kussarigawa** -
+---
 
 ## 🎉 **Enjoy Your Pizza!**
-🌟 Future Improvements
-To take PizzaLava to the next level, consider the following enhancements:
 
-React Frontend: Migrate the frontend to React for a more dynamic and scalable user interface.
-Real-Time Order Tracking: Implement WebSockets to provide live updates on order status.
-Mobile App: Develop a mobile app for Android and iOS to reach more customers.
+Whether you're deploying with Docker or running locally, PizzaLava is ready to deliver. Thank you for choosing PizzaLava! 🍕✨
 
-Thank you for checking out PizzaLava. We hope you enjoy using our app as much as we enjoyed building it! 🍕✨
+--- 
 
----
+Would you like me to enhance this further with diagrams or specific commands?
