@@ -1,0 +1,48 @@
+version: '3.8'
+
+services:
+  web:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: pizza_web
+    command: gunicorn pizza_delivery_platform.wsgi:application --bind 0.0.0.0:8000 --workers 3
+    volumes:
+      - .:/pizza_delivery_platform  # Синхронизация кода проекта
+      - static_volume:/pizza_delivery_platform/static  # Для статических файлов
+      - media_volume:/pizza_delivery_platform/media  # Для медиа-файлов
+    ports:
+      - "8000:8000"
+    env_file:
+      - .env
+    depends_on:
+      - db
+
+  db:
+    image: postgres:15
+    container_name: pizza_db
+    restart: always
+    environment:
+      POSTGRES_USER: ${DATABASE_USER}
+      POSTGRES_PASSWORD: ${DATABASE_PASSWORD}
+      POSTGRES_DB: ${DATABASE_NAME}
+    volumes:
+      - postgres_data:/var/lib/postgresql/data  # Сохранение данных базы
+    ports:
+      - "5432:5432"
+
+  npm:
+    image: node:18
+    container_name: pizza_npm
+    working_dir: /pizza_delivery_platform
+    volumes:
+      - .:/pizza_delivery_platform  # Синхронизация кода проекта
+    command: ["npm", "install"]
+
+volumes:
+  postgres_data:  # Для хранения данных PostgreSQL
+    driver: local
+  static_volume:  # Для статических файлов Django
+    driver: local
+  media_volume:  # Для медиа-файлов Django
+    driver: local

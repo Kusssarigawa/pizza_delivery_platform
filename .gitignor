@@ -1,0 +1,29 @@
+# Системные файлы
+.DS_Store
+Thumbs.db
+
+# Виртуальные окружения
+env/
+venv/
+
+# Пакеты Python
+__pycache__/
+*.py[cod]
+*.pyo
+
+# Прочие временные файлы
+*.log
+*.bak
+*.swp
+
+# Конфигурационные файлы IDE
+.idea/
+.vscode/
+
+# Файлы с зависимостями (если они есть)
+*.egg-info/
+dist/
+build/
+
+# Конфигурации Docker
+docker-compose.override.yml
