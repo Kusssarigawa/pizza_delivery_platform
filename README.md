@@ -2,7 +2,8 @@
 ---
 
 # 🍕 **PizzaLava - The Ultimate Pizza Delivery Service**
-![Screen Main](Screenshots (short project prewiew)/screen_main.png)
+![screen_main](https://github.com/user-attachments/assets/523b39d0-ab55-43e5-89ce-fd96e2d55c25)
+
 Welcome to **PizzaLava**, the most delicious online pizza delivery service! Powered by Django and a blend of modern frameworks, PizzaLava is designed to deliver not just pizza but also a seamless and enjoyable user experience.
 
 ## 🚀 **Project Overview**
@@ -91,6 +92,12 @@ This project is licensed under the MIT License. See the [LICENSE](LICENSE) file 
 - **Kussarigawa** -
 
 ## 🎉 **Enjoy Your Pizza!**
+🌟 Future Improvements
+To take PizzaLava to the next level, consider the following enhancements:
+
+React Frontend: Migrate the frontend to React for a more dynamic and scalable user interface.
+Real-Time Order Tracking: Implement WebSockets to provide live updates on order status.
+Mobile App: Develop a mobile app for Android and iOS to reach more customers.
 
 Thank you for checking out PizzaLava. We hope you enjoy using our app as much as we enjoyed building it! 🍕✨
 
